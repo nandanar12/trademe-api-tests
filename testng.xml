@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TradeMeAPITestSuite">
+    <listeners>
+        <listener class-name="com.trademe.framework.reporting.ExtentTestListener"/>
+    </listeners>
+
+    <test name="AllAPITests">
+        <classes>
+            <class name="apitests.GetLatestListingsTest"/>
+            <class name="apitests.ListingACarTest"/>
+        </classes>
+    </test>
+</suite>

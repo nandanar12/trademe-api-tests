@@ -1,0 +1,29 @@
+{
+  "Category": "271",
+  "Description": ["Looking for a bit of European thrill? Then why not take a look at this 2.0L 147kW Turbo Quattro Audi A4 wagon. Presented in superb condition with Moro Blue exterior with Chrome details."],
+  "StartPrice": 17985,
+  "Duration": "Seven",
+  "Pickup": "Allow",
+  "SendPaymentInstructions": true,
+  "IsBold": true,
+  "ShippingOptions": [ { "Type": "Free" } ],
+  "PaymentMethods": ["CreditCard", "Cash"],
+  "Attributes": [
+    { "Name": "BestContactTime", "Value": "Anytime" },
+    { "Name": "BodyStyle", "Value": "Sedan" },
+    { "Name": "EngineSize", "Value": "2000" },
+    { "Name": "ExteriorColour", "Value": "Dark Blue" },
+    { "Name": "FuelType", "Value": "Petrol" },
+    { "Name": "Kilometres", "Value": "61988" },
+    { "Name": "Model", "Value": "A4" },
+    { "Name": "ModelDetail", "Value": "FSI Quattro" },
+    { "Name": "NumberPlate", "Value": "ABC123" },
+    { "Name": "ShowNumberPlate", "Value": "true" },
+    { "Name": "OnRoadCosts", "Value": "true" },
+    { "Name": "ApproximateValue", "Value": "20000" },
+    { "Name": "Transmission", "Value": "2" },
+    { "Name": "VIN", "Value": "WAUZZZ8EX5A457186" },
+    { "Name": "Year", "Value": "2005" },
+    { "Name": "AirConditioning", "Value": "true" }
+  ]
+}
