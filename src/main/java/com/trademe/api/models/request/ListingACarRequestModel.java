@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ListingACarRequestJson {
+public class ListingACarRequestModel {
     @JsonProperty("Category")
     public String category;
     @JsonProperty("Description")

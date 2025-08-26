@@ -1,44 +1,28 @@
 package com.trademe.framework.reporting;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.*;
 import org.testng.*;
 
 public class ExtentTestListener implements ITestListener, ISuiteListener {
+    private static ExtentReports extent;
+    private static final ThreadLocal<ExtentTest> CURRENT = new ThreadLocal<>();
 
-    private static final ThreadLocal<ExtentTest> tl = new ThreadLocal<>();
-    private ExtentReports extent;
+    public static ExtentTest currentTest() { return CURRENT.get(); }
 
-    @Override
-    public void onStart(ISuite suite) {
+    @Override public void onStart(ISuite suite) {
         extent = ExtentManager.getInstance();
     }
 
-    @Override
-    public void onFinish(ISuite suite) {
+    @Override public void onFinish(ISuite suite) {
         if (extent != null) extent.flush();
     }
 
-    @Override
-    public void onTestStart(ITestResult result) {
-        String name = result.getMethod().getMethodName();
-        String cls = result.getTestClass().getName();
-        ExtentTest test = extent.createTest(name).assignCategory(cls);
-        tl.set(test);
-        test.info("Starting: " + cls + "#" + name);
+    @Override public void onTestStart(ITestResult r) {
+        ExtentTest t = extent.createTest(r.getMethod().getMethodName());
+        CURRENT.set(t);
     }
 
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        tl.get().pass("Passed");
-    }
-
-    @Override
-    public void onTestFailure(ITestResult result) {
-        ExtentTest t = tl.get();
-        t.fail(result.getThrowable());
-        Object respBody = result.getAttribute("respBody");
-        if (respBody != null) t.info("<pre>" + respBody + "</pre>");
-    }
-
+    @Override public void onTestSuccess(ITestResult r) { CURRENT.get().pass("PASS"); }
+    @Override public void onTestFailure(ITestResult r) { CURRENT.get().fail(r.getThrowable()); }
+    @Override public void onTestSkipped(ITestResult r) { CURRENT.get().skip(r.getThrowable()); }
 }

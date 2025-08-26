@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
-public class PayLoadLoader {
+public class PayloadLoader {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static <T> T load(String classpathPath, Class<T> type) {

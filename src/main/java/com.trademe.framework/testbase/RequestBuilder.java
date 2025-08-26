@@ -1,15 +1,17 @@
-package com.trademe.framework.base;
+package com.trademe.framework.testbase;
+
+import com.trademe.framework.config.ConfigPropertiesLoader;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 
 public class RequestBuilder {
-    private Specs(){}
 
     public static RequestSpecification request() {
         return new RequestSpecBuilder()
-                .setBaseUri(ConfigPropertiesLoader.baseUrl())
+                .setBaseUri(ConfigPropertiesLoader.baseUri())
                 .setAccept(ContentType.JSON)
                 .setContentType(ContentType.JSON)
-                // mask sensitive headers in Rest Assured request logging
-                .setConfig(config().logConfig(LogConfig.logConfig().blacklistHeader("Authorization")))
                 .build();
     }
 }

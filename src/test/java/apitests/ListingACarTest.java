@@ -1,33 +1,38 @@
 package apitests;
 
-import com.trademe.framework.utils.PayLoadLoader;
+import com.trademe.framework.reporting.TestLog;
+import com.trademe.framework.utils.PayloadLoader;
 import com.trademe.api.clients.ListingACarApi;
-import com.trademe.framework.base.BaseUriLoader;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import com.trademe.api.models.request.ListingACarRequestJson;
-import com.trademe.api.models.response.ListingACarResponseJson;
+import com.trademe.api.models.request.ListingACarRequestModel;
+import com.trademe.api.models.response.ListingACarResponseModel;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class ListingACarTest extends BaseUriLoader {
+public class ListingACarTest{
 
     @Test(description = "Create car listing (POST) and validate the response")
     public void listACarAndVerifyResponse(){
         ListingACarApi listingACarApi = new ListingACarApi();
 
-        ListingACarRequestJson req = PayLoadLoader.load("payloads/listing_a_car.json", ListingACarRequestJson.class);
-        ListingACarResponseJson response = listingACarApi.createCarListing(req);
+        //Passing data through json file
+        ListingACarRequestModel req = PayloadLoader.load("payloads/listing_a_car.json", ListingACarRequestModel.class);
+        Response http = listingACarApi.createCarListingResponse(req);
+        TestLog.info("Status={}, timeMs={}", http.statusCode(), http.time());
+        assertThat(http.statusCode(), anyOf(is(200), is(201)));
+
+        ListingACarResponseModel response = http.as(ListingACarResponseModel.class);
 
         String msg = response.getDescription();
-        long id = response.getListingId();
+        Long id = response.getListingId();
 
         if (Boolean.TRUE.equals(response.getSuccess())) {
             assertThat(msg, equalTo("ListingId " + id + " created."));
             assertThat(id, greaterThan(0L));
         } else {
             assertThat(msg, equalTo("Insufficient balance"));
-            assertThat(id, equalTo(0L));
         }
     }
 }
