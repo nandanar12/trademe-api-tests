@@ -14,6 +14,9 @@ public class GetLatestListingApi {
                 .oauth(ConfigPropertiesLoader.consumerKey(), ConfigPropertiesLoader.consumerSecret(), "", "")
                 .accept("application/json")
                 .when()
-                .get(ConfigPropertiesLoader.latestPath());
+                .get(ConfigPropertiesLoader.latestPath())
+                .then()
+                .log().ifStatusCodeMatches(greaterThanOrEqualTo(400))
+                .extract().response();
     }
 }
