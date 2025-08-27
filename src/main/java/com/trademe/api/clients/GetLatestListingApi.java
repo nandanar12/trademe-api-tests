@@ -13,7 +13,6 @@ public class GetLatestListingApi {
                 .auth()
                 .oauth(ConfigPropertiesLoader.consumerKey(), ConfigPropertiesLoader.consumerSecret(), "", "")
                 .accept("application/json")
-                .log().ifValidationFails()
                 .when()
                 .get(ConfigPropertiesLoader.latestPath());
     }
