@@ -19,11 +19,11 @@ public class ListingACarTest{
 
         //Passing data through json file
         ListingACarRequestModel req = PayloadLoader.load("payloads/listing_a_car.json", ListingACarRequestModel.class);
-        Response http = listingACarApi.createCarListingResponse(req);
-        TestLog.info("Status={}, timeMs={}", http.statusCode(), http.time());
-        assertThat(http.statusCode(), anyOf(is(200), is(201)));
+        Response res = listingACarApi.createCarListingResponse(req);
+        TestLog.info("Status={}, timeMs={}", res.statusCode(), res.time());
+        assertThat(res.statusCode(), anyOf(is(200), is(201)));
 
-        ListingACarResponseModel response = http.as(ListingACarResponseModel.class);
+        ListingACarResponseModel response = res.as(ListingACarResponseModel.class);
 
         String msg = response.getDescription();
         Long id = response.getListingId();
