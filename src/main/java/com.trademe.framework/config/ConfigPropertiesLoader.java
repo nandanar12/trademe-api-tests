@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigPropertiesLoader {
-    private static final String CONFIG_FILE = "src/test/resources/config/config.properties";
+    private static final String CONFIG_FILE = "config.properties";
     private static final Properties PROPERTIES = new Properties();
 
     static {
